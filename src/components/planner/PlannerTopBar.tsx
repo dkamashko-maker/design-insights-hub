@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Save, Check } from "lucide-react";
+import { ArrowLeft, Save, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { usePlannerStore } from "@/stores/plannerStore";
+import ExportMenu from "./ExportMenu";
 import { toast } from "sonner";
 
 interface Props {
@@ -16,32 +16,8 @@ const PlannerTopBar = ({ stageRef }: Props) => {
   const [nameInput, setNameInput] = useState(projectName);
 
   const handleSave = () => {
-    // Mock save
     markClean();
     toast.success("Проект сохранён");
-  };
-
-  const handleExportPNG = () => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const uri = stage.toDataURL({ pixelRatio: 2 });
-    const link = document.createElement("a");
-    link.download = `${projectName}.png`;
-    link.href = uri;
-    link.click();
-    toast.success("PNG скачан");
-  };
-
-  const handleExportPDF = async () => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const { jsPDF } = await import("jspdf");
-    const uri = stage.toDataURL({ pixelRatio: 2 });
-    const pdf = new jsPDF("landscape", "px", [stage.width(), stage.height()]);
-    pdf.text(projectName, 20, 30);
-    pdf.addImage(uri, "PNG", 0, 40, stage.width(), stage.height());
-    pdf.save(`${projectName}.pdf`);
-    toast.success("PDF скачан");
   };
 
   const handleNameSubmit = () => {
@@ -77,12 +53,8 @@ const PlannerTopBar = ({ stageRef }: Props) => {
       {/* Center: 2D/3D */}
       <div className="flex-1 flex justify-center">
         <div className="flex">
-          <button className="px-4 py-1.5 text-sm font-montserrat font-medium bg-[#008080] text-white">
-            2D
-          </button>
-          <button onClick={handle3D} className="px-4 py-1.5 text-sm font-montserrat font-medium bg-white text-[#333] border border-[rgba(0,128,128,0.3)]">
-            3D
-          </button>
+          <button className="px-4 py-1.5 text-sm font-montserrat font-medium bg-[#008080] text-white">2D</button>
+          <button onClick={handle3D} className="px-4 py-1.5 text-sm font-montserrat font-medium bg-white text-[#333] border border-[rgba(0,128,128,0.3)]">3D</button>
         </div>
       </div>
 
@@ -94,17 +66,7 @@ const PlannerTopBar = ({ stageRef }: Props) => {
         <Button size="sm" onClick={handleSave} className="bg-[#008080] text-white font-montserrat font-semibold text-sm">
           <Save className="w-4 h-4 mr-1" /> Сохранить
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size="sm" variant="outline" className="border-[#008080] text-[#008080]">
-              <Download className="w-4 h-4 mr-1" /> Экспорт
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem onClick={handleExportPNG}>Сохранить как PNG</DropdownMenuItem>
-            <DropdownMenuItem onClick={handleExportPDF}>Сохранить как PDF</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ExportMenu stageRef={stageRef} />
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import DesignsPage from "./pages/DesignsPage";
 import DesignDetailPage from "./pages/DesignDetailPage";
 const PlannerPage = lazy(() => import("./pages/PlannerPage"));
+const SharePage = lazy(() => import("./pages/SharePage"));
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
@@ -39,6 +40,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/planner/:id" element={<Suspense fallback={<div className="flex items-center justify-center h-screen">Загрузка...</div>}><PlannerPage /></Suspense>} />
+          <Route path="/share/:shareToken" element={<Suspense fallback={<div className="flex items-center justify-center h-screen">Загрузка...</div>}><SharePage /></Suspense>} />
 
           {/* Admin routes — own layout */}
           <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />

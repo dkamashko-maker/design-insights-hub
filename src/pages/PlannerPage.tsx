@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePlannerStore } from "@/stores/plannerStore";
 import PlannerTopBar from "@/components/planner/PlannerTopBar";
@@ -8,20 +8,26 @@ import CatalogPanel from "@/components/planner/CatalogPanel";
 import PropertiesPanel from "@/components/planner/PropertiesPanel";
 import LeftPanel from "@/components/planner/LeftPanel";
 import StatusBar from "@/components/planner/StatusBar";
+import NewProjectWizard from "@/components/planner/NewProjectWizard";
 import { toast } from "sonner";
 
 const PlannerPage = () => {
   const { id } = useParams();
   const stageRef = useRef<any>(null);
+  const [showWizard, setShowWizard] = useState(false);
 
   const {
     setProjectMeta, undo, redo, selectObject, setActiveTool, deleteObject,
-    selectedObjectId, isDirty, markClean,
+    selectedObjectId, isDirty, markClean, objects,
     rightCatalogOpen, rightPropsOpen,
   } = usePlannerStore();
 
   useEffect(() => {
-    setProjectMeta(id || "new", id === "new" ? "Новый проект" : `Проект ${id?.slice(0, 8)}`);
+    const isNew = id === "new";
+    setProjectMeta(id || "new", isNew ? "Новый проект" : `Проект ${id?.slice(0, 8)}`);
+    if (isNew && objects.length === 0) {
+      setShowWizard(true);
+    }
   }, [id, setProjectMeta]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -66,6 +72,7 @@ const PlannerPage = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden bg-[#F5F5F5]">
+      {showWizard && <NewProjectWizard onComplete={() => setShowWizard(false)} />}
       <PlannerTopBar stageRef={stageRef} />
       <div className="flex flex-1 overflow-hidden relative">
         <PlannerToolbar />

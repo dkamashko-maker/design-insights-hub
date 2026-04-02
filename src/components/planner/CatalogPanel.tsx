@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { X, Search, Plus, Sparkles } from "lucide-react";
+import { X, Search, Plus } from "lucide-react";
+import FurnitureAIPanel from "./FurnitureAIPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { usePlannerStore } from "@/stores/plannerStore";
 import { products, categories } from "@/data/mockData";
 import { CM_TO_PX } from "@/constants/planner";
-import { useCartStore } from "@/stores/appStore";
+
 
 const CatalogPanel = () => {
-  const { rightCatalogOpen, setRightCatalogOpen, activeFurnitureTab, setActiveFurnitureTab, addObject, stageScale } = usePlannerStore();
-  const addToCart = useCartStore((s) => s.addItem);
+  const { rightCatalogOpen, setRightCatalogOpen, activeFurnitureTab, setActiveFurnitureTab, addObject } = usePlannerStore();
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState<string | null>(null);
-  const [aiQuery, setAiQuery] = useState("");
-  const [aiResults, setAiResults] = useState<typeof products | null>(null);
 
   if (!rightCatalogOpen) return null;
 
@@ -51,11 +48,6 @@ const CatalogPanel = () => {
     });
   };
 
-  const handleAI = () => {
-    const lower = aiQuery.toLowerCase();
-    const matches = products.filter((p) => p.style.toLowerCase().includes(lower) || p.name.toLowerCase().includes(lower));
-    setAiResults(matches.length > 0 ? matches : products.slice(0, 4));
-  };
 
   return (
     <div className="w-[345px] bg-white border-l border-[rgba(0,128,128,0.3)] flex flex-col shrink-0 overflow-hidden">
@@ -130,30 +122,7 @@ const CatalogPanel = () => {
         )}
 
         {activeFurnitureTab === "ai" && (
-          <>
-            <div className="mb-4">
-              <Textarea value={aiQuery} onChange={(e) => setAiQuery(e.target.value)} placeholder="Опишите стиль или задачу..." rows={3} className="text-sm" />
-              <Button onClick={handleAI} className="w-full mt-2 bg-[#008080] text-white text-sm" disabled={!aiQuery.trim()}>
-                <Sparkles className="w-4 h-4 mr-1" /> Подобрать
-              </Button>
-            </div>
-            {aiResults && (
-              <div className="grid grid-cols-2 gap-2">
-                {aiResults.map((p) => (
-                  <div key={p.id} className="border border-border rounded-lg overflow-hidden bg-white">
-                    <img src={p.images[0]} alt={p.name} className="w-full h-[100px] object-cover" />
-                    <div className="p-2">
-                      <p className="text-[12px] font-medium truncate">{p.name}</p>
-                      <p className="text-[13px] font-bold text-[#008080]">{p.price.toLocaleString("ru-RU")} ₽</p>
-                      <Button size="sm" className="w-full h-7 text-[11px] mt-1.5 bg-[#008080] text-white" onClick={() => handleAdd(p)}>
-                        <Plus className="w-3 h-3 mr-0.5" /> Добавить
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
+          <FurnitureAIPanel />
         )}
       </div>
     </div>
