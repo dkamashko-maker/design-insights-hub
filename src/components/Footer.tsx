@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="flex items-start justify-between">
         {/* Logo */}
         <div className="shrink-0">
-          <Link to="/" className="flex items-baseline gap-0">
-            <span className="font-playfair font-light text-white text-[28px] tracking-tight">
+          <Link to="/" className="flex items-baseline gap-0 uppercase">
+            <span className="font-playfair font-light text-white text-[32px] tracking-[0.02em]">
               Ru
             </span>
-            <span className="font-montserrat font-medium text-white text-[28px] tracking-tight">
+            <span className="font-montserrat font-medium text-white text-[32px] tracking-[0.02em]">
               mica
             </span>
           </Link>
