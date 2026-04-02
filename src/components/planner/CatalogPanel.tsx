@@ -48,11 +48,6 @@ const CatalogPanel = () => {
     });
   };
 
-  const handleAI = () => {
-    const lower = aiQuery.toLowerCase();
-    const matches = products.filter((p) => p.style.toLowerCase().includes(lower) || p.name.toLowerCase().includes(lower));
-    setAiResults(matches.length > 0 ? matches : products.slice(0, 4));
-  };
 
   return (
     <div className="w-[345px] bg-white border-l border-[rgba(0,128,128,0.3)] flex flex-col shrink-0 overflow-hidden">
