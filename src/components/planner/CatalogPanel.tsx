@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { X, Search, Plus, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { X, Search, Plus } from "lucide-react";
+import FurnitureAIPanel from "./FurnitureAIPanel";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { usePlannerStore } from "@/stores/plannerStore";
