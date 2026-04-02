@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { X, Search, Plus } from "lucide-react";
 import FurnitureAIPanel from "./FurnitureAIPanel";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { usePlannerStore } from "@/stores/plannerStore";
 import { products, categories } from "@/data/mockData";
 import { CM_TO_PX } from "@/constants/planner";
