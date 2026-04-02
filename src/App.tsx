@@ -15,6 +15,7 @@ import PlannerPage from "./pages/PlannerPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import AssistantPage from "./pages/AssistantPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
