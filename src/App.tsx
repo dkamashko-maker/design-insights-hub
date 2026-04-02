@@ -38,7 +38,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/planner/:id" element={<PlannerPage />} />
+          <Route path="/planner/:id" element={<Suspense fallback={<div className="flex items-center justify-center h-screen">Загрузка...</div>}><PlannerPage /></Suspense>} />
 
           {/* Admin routes — own layout */}
           <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
