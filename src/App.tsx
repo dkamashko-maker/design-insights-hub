@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { lazy, Suspense } from "react";
 import Layout from "./components/Layout";
 import AdminLayout from "./components/AdminLayout";
 import Index from "./pages/Index";
@@ -12,7 +13,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 import DesignsPage from "./pages/DesignsPage";
 import DesignDetailPage from "./pages/DesignDetailPage";
-import PlannerPage from "./pages/PlannerPage";
+const PlannerPage = lazy(() => import("./pages/PlannerPage"));
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
@@ -37,7 +38,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/planner/:id" element={<PlannerPage />} />
+          <Route path="/planner/:id" element={<Suspense fallback={<div className="flex items-center justify-center h-screen">Загрузка...</div>}><PlannerPage /></Suspense>} />
 
           {/* Admin routes — own layout */}
           <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
