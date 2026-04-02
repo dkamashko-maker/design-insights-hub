@@ -15,6 +15,7 @@ import PlannerPage from "./pages/PlannerPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import AssistantPage from "./pages/AssistantPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -42,7 +43,7 @@ const App = () => (
             <Route path="/order-success" element={<OrderSuccessPage />} />
             <Route path="/favorites" element={<Placeholder />} />
             <Route path="/profile" element={<Placeholder />} />
-            <Route path="/assistant" element={<Placeholder />} />
+            <Route path="/assistant" element={<AssistantPage />} />
             <Route path="/auth/login" element={<Placeholder />} />
             <Route path="/auth/register" element={<Placeholder />} />
             <Route path="/auth/forgot-password" element={<Placeholder />} />
