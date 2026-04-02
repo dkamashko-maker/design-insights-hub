@@ -16,13 +16,8 @@ const Header = () => {
     <header className="w-full h-[104px] bg-art-accent flex items-stretch">
       {/* Logo panel */}
       <div className="w-[345px] bg-art-main flex items-center px-6 shrink-0">
-        <Link to="/" className="flex items-baseline gap-0 uppercase">
-          <span className="font-playfair font-light text-white text-[32px] tracking-[0.02em]">
-            Ru
-          </span>
-          <span className="font-montserrat font-medium text-white text-[32px] tracking-[0.02em]">
-            mica
-          </span>
+        <Link to="/" className="font-montserrat text-[32px] font-medium uppercase tracking-[0.02em] text-white">
+          RUMICA
         </Link>
       </div>
 
