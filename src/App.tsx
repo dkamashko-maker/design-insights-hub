@@ -7,6 +7,11 @@ import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import CatalogPage from "./pages/CatalogPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
+import DesignsPage from "./pages/DesignsPage";
+import DesignDetailPage from "./pages/DesignDetailPage";
+import PlannerPage from "./pages/PlannerPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -19,15 +24,17 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Planner: full viewport, no header/footer */}
+          <Route path="/planner/:id" element={<PlannerPage />} />
+
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:id" element={<ProductDetailPage />} />
-            <Route path="/projects" element={<Placeholder />} />
-            <Route path="/projects/:id" element={<Placeholder />} />
-            <Route path="/planner/:id" element={<Placeholder />} />
-            <Route path="/designs" element={<Placeholder />} />
-            <Route path="/designs/:id" element={<Placeholder />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:id" element={<ProjectDetailPage />} />
+            <Route path="/designs" element={<DesignsPage />} />
+            <Route path="/designs/:id" element={<DesignDetailPage />} />
             <Route path="/cart" element={<Placeholder />} />
             <Route path="/checkout" element={<Placeholder />} />
             <Route path="/order-success" element={<Placeholder />} />
