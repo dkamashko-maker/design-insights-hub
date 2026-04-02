@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
+import CatalogPage from "./pages/CatalogPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -19,8 +21,8 @@ const App = () => (
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
-            <Route path="/catalog" element={<Placeholder />} />
-            <Route path="/catalog/:id" element={<Placeholder />} />
+            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/catalog/:id" element={<ProductDetailPage />} />
             <Route path="/projects" element={<Placeholder />} />
             <Route path="/projects/:id" element={<Placeholder />} />
             <Route path="/planner/:id" element={<Placeholder />} />
