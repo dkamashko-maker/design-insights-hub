@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="flex items-start justify-between">
         {/* Logo */}
         <div className="shrink-0">
-          <Link to="/" className="font-montserrat text-[32px] font-medium uppercase tracking-[0.02em] text-white">
-            RUMICA
+          <Link to="/" className="font-montserrat text-[36px] font-medium lowercase tracking-[0.04em] text-white">
+            rumica
           </Link>
         </div>
 

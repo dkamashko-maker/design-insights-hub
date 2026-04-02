@@ -16,8 +16,8 @@ const Header = () => {
     <header className="w-full h-[104px] bg-art-accent flex items-stretch">
       {/* Logo panel */}
       <div className="w-[345px] bg-art-main flex items-center px-6 shrink-0">
-        <Link to="/" className="font-montserrat text-[32px] font-medium uppercase tracking-[0.02em] text-white">
-          RUMICA
+        <Link to="/" className="font-montserrat text-[36px] font-medium lowercase tracking-[0.04em] text-white">
+          rumica
         </Link>
       </div>
 
