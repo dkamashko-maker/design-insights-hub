@@ -170,7 +170,7 @@ const PlannerCanvas = ({ width, height }: Props) => {
       y={stageY}
       onWheel={handleWheel}
       onClick={handleStageClick}
-      onTap={handleStageClick}
+      onTap={(e: any) => handleStageClick(e)}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
