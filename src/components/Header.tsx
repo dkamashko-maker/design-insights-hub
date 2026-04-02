@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, Heart, ShoppingCart } from "lucide-react";
+import { User, Heart, ShoppingCart, LogOut } from "lucide-react";
 import { useCartStore } from "@/stores/appStore";
+import { useAuthStore } from "@/stores/authStore";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const navItems = [
   { label: "Планировщик", path: "/planner/new" },
