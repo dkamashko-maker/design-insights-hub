@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { usePlannerStore } from "@/stores/plannerStore";
 import { products, categories } from "@/data/mockData";
 import { CM_TO_PX } from "@/constants/planner";
-import { useCartStore } from "@/stores/appStore";
+
 
 const CatalogPanel = () => {
   const { rightCatalogOpen, setRightCatalogOpen, activeFurnitureTab, setActiveFurnitureTab, addObject } = usePlannerStore();
