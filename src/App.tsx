@@ -14,6 +14,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import DesignsPage from "./pages/DesignsPage";
 import DesignDetailPage from "./pages/DesignDetailPage";
 const PlannerPage = lazy(() => import("./pages/PlannerPage"));
+const SharePage = lazy(() => import("./pages/SharePage"));
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
