@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="shrink-0">
           <Link to="/" className="flex items-baseline gap-0">
             <span className="font-playfair font-light text-white text-[28px] tracking-tight">
-              Art
+              Ru
             </span>
             <span className="font-montserrat font-medium text-white text-[28px] tracking-tight">
-              Decor
+              mica
             </span>
           </Link>
         </div>
