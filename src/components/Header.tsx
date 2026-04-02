@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, Heart, ShoppingCart } from "lucide-react";
+import { User, Heart, ShoppingCart, LogOut } from "lucide-react";
 import { useCartStore } from "@/stores/appStore";
+import { useAuthStore } from "@/stores/authStore";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const navItems = [
   { label: "Планировщик", path: "/planner/new" },
@@ -13,6 +15,7 @@ const navItems = [
 const Header = () => {
   const location = useLocation();
   const cartCount = useCartStore((s) => s.getCount());
+  const { user, isAuthenticated, logout } = useAuthStore();
 
   return (
     <header className="w-full h-[104px] bg-art-accent flex items-stretch">
@@ -43,9 +46,25 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-5">
-          <Link to="/profile" className="text-white hover:opacity-80 transition-opacity">
-            <User className="w-6 h-6" />
-          </Link>
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-3">
+              <Link to="/profile" className="flex items-center gap-2 text-white hover:opacity-80 transition-opacity">
+                <Avatar className="w-8 h-8 border border-white/30">
+                  <AvatarFallback className="bg-white/20 text-white text-xs font-montserrat">
+                    {user.firstName[0]}{user.lastName[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="text-sm font-montserrat hidden xl:inline">{user.firstName}</span>
+              </Link>
+              <button onClick={logout} className="text-white hover:opacity-80 transition-opacity" title="Выйти">
+                <LogOut className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth/login" className="text-white hover:opacity-80 transition-opacity">
+              <User className="w-6 h-6" />
+            </Link>
+          )}
           <Link to="/favorites" className="text-white hover:opacity-80 transition-opacity">
             <Heart className="w-6 h-6" />
           </Link>
