@@ -15,6 +15,7 @@ const navItems = [
 const Header = () => {
   const location = useLocation();
   const cartCount = useCartStore((s) => s.getCount());
+  const { user, isAuthenticated, logout } = useAuthStore();
 
   return (
     <header className="w-full h-[104px] bg-art-accent flex items-stretch">
