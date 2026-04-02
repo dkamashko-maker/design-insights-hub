@@ -9,12 +9,9 @@ import { CM_TO_PX } from "@/constants/planner";
 import { useCartStore } from "@/stores/appStore";
 
 const CatalogPanel = () => {
-  const { rightCatalogOpen, setRightCatalogOpen, activeFurnitureTab, setActiveFurnitureTab, addObject, stageScale } = usePlannerStore();
-  const addToCart = useCartStore((s) => s.addItem);
+  const { rightCatalogOpen, setRightCatalogOpen, activeFurnitureTab, setActiveFurnitureTab, addObject } = usePlannerStore();
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState<string | null>(null);
-  const [aiQuery, setAiQuery] = useState("");
-  const [aiResults, setAiResults] = useState<typeof products | null>(null);
 
   if (!rightCatalogOpen) return null;
 
