@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
 import Index from "./pages/Index";
 import CatalogPage from "./pages/CatalogPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
@@ -16,6 +17,14 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import AssistantPage from "./pages/AssistantPage";
+import ProfilePage from "./pages/ProfilePage";
+import FavoritesPage from "./pages/FavoritesPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminDesignPacks from "./pages/admin/AdminDesignPacks";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminOrders from "./pages/admin/AdminOrders";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +39,14 @@ const App = () => (
         <Routes>
           <Route path="/planner/:id" element={<PlannerPage />} />
 
+          {/* Admin routes — own layout */}
+          <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
+          <Route path="/admin/products" element={<AdminLayout><AdminProducts /></AdminLayout>} />
+          <Route path="/admin/categories" element={<AdminLayout><AdminCategories /></AdminLayout>} />
+          <Route path="/admin/design-packs" element={<AdminLayout><AdminDesignPacks /></AdminLayout>} />
+          <Route path="/admin/users" element={<AdminLayout><AdminUsers /></AdminLayout>} />
+          <Route path="/admin/orders" element={<AdminLayout><AdminOrders /></AdminLayout>} />
+
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<CatalogPage />} />
@@ -41,19 +58,13 @@ const App = () => (
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-success" element={<OrderSuccessPage />} />
-            <Route path="/favorites" element={<Placeholder />} />
-            <Route path="/profile" element={<Placeholder />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/assistant" element={<AssistantPage />} />
             <Route path="/auth/login" element={<Placeholder />} />
             <Route path="/auth/register" element={<Placeholder />} />
             <Route path="/auth/forgot-password" element={<Placeholder />} />
             <Route path="/auth/confirm" element={<Placeholder />} />
-            <Route path="/admin" element={<Placeholder />} />
-            <Route path="/admin/products" element={<Placeholder />} />
-            <Route path="/admin/categories" element={<Placeholder />} />
-            <Route path="/admin/design-packs" element={<Placeholder />} />
-            <Route path="/admin/users" element={<Placeholder />} />
-            <Route path="/admin/orders" element={<Placeholder />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
