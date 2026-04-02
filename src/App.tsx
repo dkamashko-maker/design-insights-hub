@@ -34,6 +34,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminOrders from "./pages/admin/AdminOrders";
 import NotFound from "./pages/NotFound";
 
+// Force rebuild
 const queryClient = new QueryClient();
 
 const App = () => (
