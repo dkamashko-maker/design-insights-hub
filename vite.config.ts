@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   optimizeDeps: {
-    exclude: ["react-konva", "konva"],
+    include: ["react-konva", "konva"],
   },
   resolve: {
     alias: {
