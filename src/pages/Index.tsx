@@ -256,7 +256,7 @@ const Index = () => {
         </div>
         <div className="mt-8 flex items-center gap-4">
           <span className="font-montserrat font-medium text-[18px] text-art-accent">1/03</span>
-          <div className="flex-1 h-1 bg-gray-200 rounded">
+          <div className="flex-1 h-1 bg-muted rounded">
             <div className="w-[33%] h-full bg-art-accent rounded" />
           </div>
         </div>
