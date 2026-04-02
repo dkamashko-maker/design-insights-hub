@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Layout from "./components/Layout";
+import Index from "./pages/Index";
+import Placeholder from "./pages/Placeholder";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +17,32 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Index />} />
+            <Route path="/catalog" element={<Placeholder />} />
+            <Route path="/catalog/:id" element={<Placeholder />} />
+            <Route path="/projects" element={<Placeholder />} />
+            <Route path="/projects/:id" element={<Placeholder />} />
+            <Route path="/planner/:id" element={<Placeholder />} />
+            <Route path="/designs" element={<Placeholder />} />
+            <Route path="/designs/:id" element={<Placeholder />} />
+            <Route path="/cart" element={<Placeholder />} />
+            <Route path="/checkout" element={<Placeholder />} />
+            <Route path="/order-success" element={<Placeholder />} />
+            <Route path="/favorites" element={<Placeholder />} />
+            <Route path="/profile" element={<Placeholder />} />
+            <Route path="/assistant" element={<Placeholder />} />
+            <Route path="/auth/login" element={<Placeholder />} />
+            <Route path="/auth/register" element={<Placeholder />} />
+            <Route path="/auth/forgot-password" element={<Placeholder />} />
+            <Route path="/auth/confirm" element={<Placeholder />} />
+            <Route path="/admin" element={<Placeholder />} />
+            <Route path="/admin/products" element={<Placeholder />} />
+            <Route path="/admin/categories" element={<Placeholder />} />
+            <Route path="/admin/design-packs" element={<Placeholder />} />
+            <Route path="/admin/users" element={<Placeholder />} />
+            <Route path="/admin/orders" element={<Placeholder />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
