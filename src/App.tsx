@@ -12,6 +12,9 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import DesignsPage from "./pages/DesignsPage";
 import DesignDetailPage from "./pages/DesignDetailPage";
 import PlannerPage from "./pages/PlannerPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +27,6 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Planner: full viewport, no header/footer */}
           <Route path="/planner/:id" element={<PlannerPage />} />
 
           <Route element={<Layout />}>
@@ -35,9 +37,9 @@ const App = () => (
             <Route path="/projects/:id" element={<ProjectDetailPage />} />
             <Route path="/designs" element={<DesignsPage />} />
             <Route path="/designs/:id" element={<DesignDetailPage />} />
-            <Route path="/cart" element={<Placeholder />} />
-            <Route path="/checkout" element={<Placeholder />} />
-            <Route path="/order-success" element={<Placeholder />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-success" element={<OrderSuccessPage />} />
             <Route path="/favorites" element={<Placeholder />} />
             <Route path="/profile" element={<Placeholder />} />
             <Route path="/assistant" element={<Placeholder />} />
