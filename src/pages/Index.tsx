@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart, ChevronLeft, ChevronRight, Layout, Armchair, Image, Zap, Users, Palette, Plus, Minus } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import heroImg from "@/assets/hero-interior.jpg";
 import design1 from "@/assets/design-1.jpg";
@@ -13,6 +13,8 @@ import product4 from "@/assets/product-4.jpg";
 import project1 from "@/assets/project-1.jpg";
 import aiAssistant from "@/assets/ai-assistant.jpg";
 import ctaBg from "@/assets/cta-bg.jpg";
+import { mockProjects } from "@/data/projectsData";
+import { mockPublicDesigns } from "@/data/projectsData";
 
 const CTALink = ({ text, to }: { text: string; to: string }) => (
   <Link to={to} className="group inline-flex flex-col gap-1">
@@ -28,24 +30,25 @@ const SectionDivider = () => (
   <div className="border-b border-art-accent-border" />
 );
 
+const heroSlides = [
+  { image: heroImg, subtitle: "КАТАЛОГ МЕБЕЛИ", title: "Моделируйте пространство в 2D и 3D, визуализируйте интерьер и подбирайте мебель из каталога" },
+  { image: design1, subtitle: "ДИЗАЙН ИНТЕРЬЕРА", title: "Создавайте уникальные интерьеры с помощью AI-ассистента и профессиональных инструментов" },
+  { image: design2, subtitle: "ПЛАНИРОВЩИК", title: "Интерактивный 2D-планировщик с drag-and-drop для точной расстановки мебели" },
+  { image: design3, subtitle: "ГОТОВЫЕ РЕШЕНИЯ", title: "Выбирайте из коллекции дизайн-пакетов и адаптируйте их под своё пространство" },
+];
+
 const products = [
-  { id: 1, name: "Кофейный столик", brand: "Poltrona Frau", price: 150, image: product1 },
-  { id: 2, name: "Деревянный комод с тёмно-синими вставками", brand: "Cassina", price: 50, image: product2 },
-  { id: 3, name: "Растение в горшке", brand: "Green Home", price: 30, image: product3 },
-  { id: 4, name: "Подвесной светильник", brand: "Cassina", price: 50, image: product4 },
-  { id: 5, name: "Стеклянная ваза", brand: "Poltrona Frau", price: 80, image: product1 },
-  { id: 6, name: "Комод классический", brand: "Cassina", price: 120, image: product2 },
-  { id: 7, name: "Декоративный кактус", brand: "Green Home", price: 25, image: product3 },
-  { id: 8, name: "Настольная лампа", brand: "Cassina", price: 90, image: product4 },
+  { id: "p1", name: "Кофейный столик Oslo", brand: "Poliform", price: 18500, image: product1, category: "Столы" },
+  { id: "p2", name: "Комод Norden", brand: "Cassina", price: 45900, image: product2, category: "Комоды" },
+  { id: "p3", name: "Растение Фикус", brand: "Green Home", price: 4200, image: product3, category: "Декор" },
+  { id: "p4", name: "Подвесной светильник Amber", brand: "RIVALLI", price: 12800, image: product4, category: "Декор" },
+  { id: "p5", name: "Журнальный столик Hairpin", brand: "Poliform", price: 9800, image: product1, category: "Столы" },
+  { id: "p6", name: "Кресло Scandi Lounge", brand: "Cassina", price: 34500, image: product2, category: "Стулья" },
+  { id: "p7", name: "Стеллаж Open Frame", brand: "RIVALLI", price: 28700, image: product3, category: "Хранение" },
+  { id: "p8", name: "Диван Comfort", brand: "Poliform", price: 89000, image: product4, category: "Диваны" },
 ];
 
 const catalogTabs = ["Все", "Диваны", "Столы", "Комоды", "Хранение", "Стулья", "Декор", "Софы"];
-
-const designs = [
-  { id: 1, title: "Скандинавская спальня — Природные текстуры и мягкий свет", image: design1 },
-  { id: 2, title: "Экологичная кухня — Натуральные оттенки зелёного", image: design2 },
-  { id: 3, title: "Гостиная модерн — Уют и минимализм", image: design3 },
-];
 
 const faqItems = [
   { q: "Какой инструмент для проектирования и дизайна интерьеров?", a: "Rumica — онлайн-платформа для проектирования интерьеров с интерактивным планировщиком, каталогом мебели и AI-ассистентом." },
@@ -73,35 +76,57 @@ const targetAudience = [
 const Index = () => {
   const [activeTab, setActiveTab] = useState("Все");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [designIndex, setDesignIndex] = useState(0);
+
+  const filteredProducts = activeTab === "Все"
+    ? products
+    : products.filter((p) => p.category === activeTab);
+
+  const designsPerPage = 3;
+  const totalDesignPages = Math.ceil(mockPublicDesigns.length / designsPerPage);
+  const visibleDesigns = mockPublicDesigns.slice(
+    designIndex * designsPerPage,
+    designIndex * designsPerPage + designsPerPage
+  );
+
+  const prevHero = useCallback(() => setHeroIndex((i) => (i - 1 + heroSlides.length) % heroSlides.length), []);
+  const nextHero = useCallback(() => setHeroIndex((i) => (i + 1) % heroSlides.length), []);
+  const prevDesign = useCallback(() => setDesignIndex((i) => (i - 1 + totalDesignPages) % totalDesignPages), [totalDesignPages]);
+  const nextDesign = useCallback(() => setDesignIndex((i) => (i + 1) % totalDesignPages), [totalDesignPages]);
+
+  const currentSlide = heroSlides[heroIndex];
 
   return (
     <div className="w-full">
       {/* HERO */}
       <section className="relative w-full h-[680px] overflow-hidden">
-        <img src={heroImg} alt="Современный дизайн интерьера" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
+        <img src={currentSlide.image} alt="Современный дизайн интерьера" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" width={1920} height={800} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
         <div className="relative z-10 h-full flex flex-col justify-center px-[60px] max-w-[600px]">
-          <p className="text-small text-white/80 mb-4">КАТАЛОГ МЕБЕЛИ</p>
+          <p className="text-small text-white/80 mb-4">{currentSlide.subtitle}</p>
           <h1 className="text-h2 text-white leading-tight mb-6">
-            Моделируйте пространство в 2D и 3D, визуализируйте интерьер и подбирайте мебель из каталога
+            {currentSlide.title}
           </h1>
-          <CTALink text="НАЧАТЬ ПРОЕКТ" to="/planner/new" />
+          <div className="inline-block bg-black/40 backdrop-blur-sm rounded-lg px-6 py-4 w-fit">
+            <CTALink text="НАЧАТЬ ПРОЕКТ" to="/planner/new" />
+          </div>
         </div>
         {/* Slide progress */}
         <div className="absolute bottom-8 left-[60px] flex items-center gap-4">
           <span className="text-white/60 font-montserrat font-medium text-[18px]">
-            <span className="text-art-accent">02</span>/07
+            <span className="text-art-accent">{String(heroIndex + 1).padStart(2, "0")}</span>/{String(heroSlides.length).padStart(2, "0")}
           </span>
           <div className="w-[200px] h-1 bg-white/20 rounded">
-            <div className="w-[28%] h-full bg-art-accent rounded" />
+            <div className="h-full bg-art-accent rounded transition-all duration-300" style={{ width: `${((heroIndex + 1) / heroSlides.length) * 100}%` }} />
           </div>
         </div>
         {/* Thumbnails */}
         <div className="absolute bottom-8 right-[60px] flex gap-3">
-          {[design1, design2, design3].map((img, i) => (
-            <div key={i} className="w-[100px] h-[70px] rounded overflow-hidden border border-white/20">
-              <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+          {heroSlides.map((slide, i) => (
+            <button key={i} onClick={() => setHeroIndex(i)} className={`w-[100px] h-[70px] rounded overflow-hidden border-2 transition-colors ${i === heroIndex ? "border-art-accent" : "border-white/20"}`}>
+              <img src={slide.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+            </button>
           ))}
         </div>
       </section>
@@ -159,29 +184,29 @@ const Index = () => {
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-h2 text-art-main">ДИЗАЙНЫ</h2>
           <div className="flex gap-2">
-            <button className="w-10 h-10 rounded-full border border-art-accent-border flex items-center justify-center hover:bg-art-accent hover:text-white transition-colors text-art-accent">
+            <button onClick={prevDesign} className="w-10 h-10 rounded-full border border-art-accent-border flex items-center justify-center hover:bg-art-accent hover:text-white transition-colors text-art-accent">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button className="w-10 h-10 rounded-full border border-art-accent-border flex items-center justify-center hover:bg-art-accent hover:text-white transition-colors text-art-accent">
+            <button onClick={nextDesign} className="w-10 h-10 rounded-full border border-art-accent-border flex items-center justify-center hover:bg-art-accent hover:text-white transition-colors text-art-accent">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-6">
-          {designs.map((d) => (
+          {visibleDesigns.map((d) => (
             <Link to={`/designs/${d.id}`} key={d.id} className="group">
               <div className="overflow-hidden rounded-lg mb-4">
-                <img src={d.image} alt={d.title} className="w-full h-[350px] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={800} height={600} />
+                <img src={d.coverImage} alt={d.name} className="w-full h-[350px] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={800} height={600} />
               </div>
-              <p className="text-body text-art-main">{d.title}</p>
+              <p className="text-body text-art-main">{d.name}</p>
             </Link>
           ))}
         </div>
         {/* Progress bar */}
         <div className="mt-8 flex items-center gap-4">
-          <span className="font-montserrat font-medium text-[18px] text-art-accent">1/03</span>
+          <span className="font-montserrat font-medium text-[18px] text-art-accent">{designIndex + 1}/{String(totalDesignPages).padStart(2, "0")}</span>
           <div className="flex-1 h-1 bg-muted rounded">
-            <div className="w-[33%] h-full bg-art-accent rounded" />
+            <div className="h-full bg-art-accent rounded transition-all duration-300" style={{ width: `${((designIndex + 1) / totalDesignPages) * 100}%` }} />
           </div>
         </div>
       </section>
@@ -212,20 +237,23 @@ const Index = () => {
         </div>
         {/* Product grid */}
         <div className="grid grid-cols-4 gap-6">
-          {products.map((p) => (
+          {filteredProducts.map((p) => (
             <Link to={`/catalog/${p.id}`} key={p.id} className="group p-2">
               <div className="relative overflow-hidden rounded-lg mb-3">
                 <img src={p.image} alt={p.name} className="w-full h-[430px] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={512} height={640} />
-                <button className="absolute top-3 right-3 text-art-main/60 hover:text-art-accent transition-colors">
+                <button onClick={(e) => e.preventDefault()} className="absolute top-3 right-3 text-art-main/60 hover:text-art-accent transition-colors">
                   <Heart className="w-6 h-6" />
                 </button>
               </div>
               <p className="text-body text-art-main mb-1">{p.name}</p>
               <p className="text-small text-art-muted mb-1">{p.brand}</p>
-              <p className="font-montserrat font-bold text-[16px] text-art-main">$ {p.price}</p>
+              <p className="font-montserrat font-bold text-[16px] text-art-main">{p.price.toLocaleString("ru-RU")} ₽</p>
             </Link>
           ))}
         </div>
+        {filteredProducts.length === 0 && (
+          <p className="text-center text-art-muted py-12">Нет товаров в этой категории</p>
+        )}
       </section>
 
       <SectionDivider />
@@ -244,20 +272,20 @@ const Index = () => {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Link to={`/projects/${i}`} key={i} className="group">
+          {mockProjects.map((proj) => (
+            <Link to={`/projects/${proj.id}`} key={proj.id} className="group">
               <div className="overflow-hidden rounded-lg mb-3">
-                <img src={project1} alt={`Проект ${i}`} className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={800} height={600} />
+                <img src={proj.thumbnailUrl} alt={proj.name} className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={800} height={600} />
               </div>
-              <p className="text-body text-art-main">Планировка квартиры — {60 + i * 10} м²</p>
-              <p className="text-small text-art-muted">Трёхкомнатная, современный стиль</p>
+              <p className="text-body text-art-main">{proj.name}</p>
+              <p className="text-small text-art-muted">{proj.description}</p>
             </Link>
           ))}
         </div>
         <div className="mt-8 flex items-center gap-4">
-          <span className="font-montserrat font-medium text-[18px] text-art-accent">1/03</span>
+          <span className="font-montserrat font-medium text-[18px] text-art-accent">1/01</span>
           <div className="flex-1 h-1 bg-muted rounded">
-            <div className="w-[33%] h-full bg-art-accent rounded" />
+            <div className="w-full h-full bg-art-accent rounded" />
           </div>
         </div>
       </section>
