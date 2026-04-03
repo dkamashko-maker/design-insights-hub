@@ -75,7 +75,7 @@ const PlannerPage = () => {
       {showWizard && <NewProjectWizard onComplete={() => setShowWizard(false)} />}
       <PlannerTopBar stageRef={stageRef} />
       <div className="flex flex-1 overflow-hidden relative">
-        <PlannerToolbar />
+        <PlannerToolbar onNewProject={() => setShowWizard(true)} />
         <LeftPanel />
         <div className="flex-1 overflow-hidden relative">
           <PlannerCanvas width={Math.max(canvasW, 400)} height={Math.max(canvasH, 300)} />
