@@ -105,7 +105,10 @@ const NewProjectWizard = ({ onComplete }: Props) => {
   if (showTemplates) {
     return (
       <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-        <div className="bg-white rounded-xl shadow-2xl w-[720px] max-w-[95vw] p-8">
+      <div className="bg-white rounded-xl shadow-2xl w-[720px] max-w-[95vw] p-8 relative">
+          <button onClick={onComplete} className="absolute right-4 top-4 text-muted-foreground hover:text-[#333] transition-colors">
+            <X className="w-5 h-5" />
+          </button>
           <button onClick={() => setShowTemplates(false)} className="text-sm text-[#008080] font-montserrat mb-4 hover:underline">← Назад</button>
           <h2 className="font-montserrat font-semibold text-xl text-[#333] mb-6">Выберите шаблон</h2>
           <div className="grid grid-cols-3 gap-4">
