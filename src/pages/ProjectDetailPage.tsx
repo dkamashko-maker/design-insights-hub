@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronRight, Share2, FileDown, ImageDown, ExternalLink } from "lucide-react";
 import { useProjectsStore } from "@/stores/projectsStore";
-import { products as allProducts } from "@/data/mockData";
+import { allProducts } from "@/data/allProducts";
 import { toast } from "@/hooks/use-toast";
 
 const ProjectDetailPage = () => {

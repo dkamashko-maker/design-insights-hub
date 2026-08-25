@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore, type Order } from "@/stores/appStore";
-import { products } from "@/data/mockData";
+import { allProducts as products } from "@/data/allProducts";
 import { useToast } from "@/hooks/use-toast";
 
 const steps = ["Доставка", "Оплата", "Подтверждение"];

@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { Heart, ShoppingCart, FolderPlus, ChevronRight } from "lucide-react";
-import { products, categories } from "@/data/mockData";
+import { categories } from "@/data/mockData";
+import { allProducts as products } from "@/data/allProducts";
 import { useFavoritesStore, useCartStore } from "@/stores/appStore";
 import { toast } from "@/hooks/use-toast";
 

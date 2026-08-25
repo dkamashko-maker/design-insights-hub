@@ -3,7 +3,8 @@ import { Minus, Plus, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/stores/appStore";
-import { products, designPacks } from "@/data/mockData";
+import { designPacks } from "@/data/mockData";
+import { allProducts as products } from "@/data/allProducts";
 
 const CartPage = () => {
   const { items, removeItem, updateQuantity } = useCartStore();
