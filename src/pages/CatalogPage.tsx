@@ -166,7 +166,6 @@ const CatalogPage = () => {
     <div className="flex h-[calc(100vh-104px)] overflow-hidden">
       {/* SIDEBAR */}
       <aside className="w-[345px] shrink-0 border-r border-art-accent-border p-6 overflow-y-auto">
-        <h2 className="text-h3 text-art-main mb-6">Фильтры</h2>
 
         {/* ЦЕНА */}
         <div className="mb-6">
