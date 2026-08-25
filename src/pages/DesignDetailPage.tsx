@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ChevronRight, Copy, User } from "lucide-react";
 import { mockPublicDesigns } from "@/data/projectsData";
-import { products as allProducts } from "@/data/mockData";
+import { allProducts } from "@/data/allProducts";
 import { toast } from "@/hooks/use-toast";
 
 const DesignDetailPage = () => {

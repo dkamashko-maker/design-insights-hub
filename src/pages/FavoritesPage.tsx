@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFavoritesStore, useCartStore } from "@/stores/appStore";
-import { products, designPacks } from "@/data/mockData";
+import { designPacks } from "@/data/mockData";
+import { allProducts as products } from "@/data/allProducts";
 
 const FavoritesPage = () => {
   const [tab, setTab] = useState<"products" | "designs">("products");

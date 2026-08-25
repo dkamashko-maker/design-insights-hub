@@ -6,7 +6,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const navItems = [
   { label: "Планировщик", path: "/planner/new" },
-  { label: "Каталог", path: "/catalog" },
+  { label: "Мебель и Интерьер", path: "/catalog" },
+  { label: "Стройматериалы", path: "/materials" },
   { label: "Проекты", path: "/projects" },
   { label: "Дизайны", path: "/designs" },
   { label: "Ассистент", path: "/assistant" },
@@ -28,14 +29,14 @@ const Header = () => {
 
       {/* Nav + icons */}
       <div className="flex-1 flex items-center justify-between px-10">
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-6">
           {navItems.map((item) => {
             const isActive = location.pathname.startsWith(item.path.replace("/new", ""));
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-montserrat font-medium text-[16px] uppercase tracking-wide text-white transition-opacity ${
+                className={`font-montserrat font-medium text-[14px] uppercase tracking-wide text-white transition-opacity ${
                   isActive ? "opacity-100 border-b-2 border-white pb-0.5" : "opacity-80 hover:opacity-100"
                 }`}
               >
