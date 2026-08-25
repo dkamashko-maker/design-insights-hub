@@ -163,9 +163,9 @@ const CatalogPage = () => {
   const getCategoryProductCount = (catId: string) => products.filter((p) => p.categoryId === catId).length;
 
   return (
-    <div className="flex min-h-[80vh]">
+    <div className="flex h-[calc(100vh-104px)] overflow-hidden">
       {/* SIDEBAR */}
-      <aside className="w-[345px] shrink-0 border-r border-art-accent-border p-6 sticky top-0 self-start max-h-screen overflow-y-auto">
+      <aside className="w-[345px] shrink-0 border-r border-art-accent-border p-6 overflow-y-auto">
         <h2 className="text-h3 text-art-main mb-6">Фильтры</h2>
 
         {/* ЦЕНА */}
@@ -314,7 +314,7 @@ const CatalogPage = () => {
       </aside>
 
       {/* MAIN CONTENT */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 overflow-y-auto">
         <h1 className="text-h2 text-art-main mb-8">КАТАЛОГ</h1>
 
         {/* Search + Sort */}
