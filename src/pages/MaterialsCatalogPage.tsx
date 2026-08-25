@@ -1,140 +1,46 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Search, ShoppingCart, FolderPlus, FileDown, ChevronDown, ChevronUp } from "lucide-react";
+import { Heart, Search, ChevronDown, ChevronUp } from "lucide-react";
 import { materialProducts, materialCategories, materialBrands, type MaterialProduct } from "@/data/materialsData";
-import { useFavoritesStore, useCartStore } from "@/stores/appStore";
-import { toast } from "@/hooks/use-toast";
+import { useFavoritesStore } from "@/stores/appStore";
 
 const MaterialCard = ({ item }: { item: MaterialProduct }) => {
   const { isProductFavorite, toggleProductFavorite } = useFavoritesStore();
-  const addItem = useCartStore((s) => s.addItem);
   const isFav = isProductFavorite(item.id);
 
-  const specs = [
-    { label: "Артикул", value: item.sku },
-    { label: "Штрихкод", value: item.barcode || "—" },
-    { label: "Вес", value: `${item.weightKg} кг` },
-    { label: "Производитель", value: item.manufacturer },
-    { label: "Поставщик", value: item.supplier },
-    { label: "Срок годности", value: item.shelfLife },
-    { label: "Сертификат", value: item.certificate },
-  ];
-
   return (
-    <article className="bg-art-warm-bg rounded-xl p-6">
-      <div className="grid grid-cols-[200px_minmax(0,1fr)] gap-6">
-        <Link to={`/catalog/${item.id}`} className="block">
-          <div className="bg-white border border-art-accent-border rounded-xl h-[200px] flex items-center justify-center overflow-hidden">
-            <img
-              src={item.images[0]}
-              alt={item.name}
-              className="w-full h-full object-contain p-3"
-              loading="lazy"
-              width={1024}
-              height={1024}
-            />
-          </div>
-        </Link>
-
-        <div className="min-w-0">
-          <p className="text-[12px] text-art-muted mb-1.5">
-            {[item.group1, item.group2, item.group3].filter(Boolean).join(" / ")}
-          </p>
-          <Link to={`/catalog/${item.id}`}>
-            <h3 className="font-montserrat text-[18px] font-medium text-art-main mb-2 leading-snug hover:text-art-accent transition-colors">
-              {item.name}
-            </h3>
-          </Link>
-
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="bg-art-accent/10 text-art-accent text-[12px] px-2.5 py-1 rounded">
-              {item.inStock ? "В наличии" : "Под заказ"}
-            </span>
-            <span className="bg-white border border-art-accent-border text-art-muted text-[12px] px-2.5 py-1 rounded">
-              {item.brand}
-            </span>
-            <span className="bg-white border border-art-accent-border text-art-muted text-[12px] px-2.5 py-1 rounded">
-              Артикул {item.sku}
-            </span>
-          </div>
-
-          <p className="text-small text-art-muted leading-relaxed mb-4 line-clamp-3">{item.description}</p>
-
-          <p className="font-montserrat font-bold text-[22px] text-art-main mb-4">
+    <div className="group p-2">
+      <Link to={`/materials/${item.id}`}>
+        <div className="relative overflow-hidden rounded-lg mb-3 bg-art-warm-bg border border-art-accent-border">
+          <img
+            src={item.images[0]}
+            alt={item.name}
+            className="w-full h-[430px] object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            width={512}
+            height={640}
+          />
+        </div>
+      </Link>
+      <div className="flex justify-between items-start gap-2">
+        <Link to={`/materials/${item.id}`} className="flex-1">
+          <p className="text-body text-art-main mb-1 leading-snug line-clamp-2">{item.name}</p>
+          <p className="text-small text-art-muted mb-1">{item.brand}</p>
+          <p className="font-montserrat font-bold text-[16px] text-art-main">
             {item.price.toLocaleString("ru-RU")} ₽
           </p>
-
-          <div className="flex flex-wrap gap-2.5">
-            <button
-              onClick={() => { addItem(item.id); toast({ title: "Товар добавлен в корзину", description: item.name }); }}
-              className="h-9 px-5 bg-art-main text-white text-[14px] font-medium rounded flex items-center gap-2 hover:opacity-90 transition-opacity"
-            >
-              <ShoppingCart className="w-4 h-4" /> В корзину
-            </button>
-            <button
-              onClick={() => toggleProductFavorite(item.id)}
-              className="h-9 px-4 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
-            >
-              <Heart className={`w-4 h-4 ${isFav ? "fill-art-accent text-art-accent" : ""}`} />
-              {isFav ? "В избранном" : "В избранное"}
-            </button>
-            <button
-              onClick={() => toast({ title: "Добавлено в проект", description: item.name })}
-              className="h-9 px-4 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
-            >
-              <FolderPlus className="w-4 h-4" /> В проект
-            </button>
-            <button
-              onClick={() => toast({ title: "Добавлено в дизайн", description: item.name })}
-              className="h-9 px-4 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
-            >
-              <FolderPlus className="w-4 h-4" /> В дизайн
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-art-accent-border mt-5 pt-4">
-        <h4 className="font-montserrat text-[14px] font-medium text-art-main mb-2.5">Характеристики</h4>
-        <table className="w-full text-[13px]">
-          <tbody>
-            {specs.map((s, i) => (
-              <tr key={s.label} className={i < specs.length - 1 ? "border-b border-art-accent-border" : ""}>
-                <td className="text-art-muted py-1.5 w-[45%] align-top">{s.label}</td>
-                <td className="py-1.5 text-art-main break-words">{s.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {item.application && (
-        <div className="border-t border-art-accent-border mt-4 pt-4">
-          <h4 className="font-montserrat text-[14px] font-medium text-art-main mb-2">Область применения</h4>
-          <p className="text-[14px] text-art-muted leading-relaxed">{item.application}</p>
-        </div>
-      )}
-
-      {item.properties.length > 0 && (
-        <div className="border-t border-art-accent-border mt-4 pt-4">
-          <h4 className="font-montserrat text-[14px] font-medium text-art-main mb-2">Свойства</h4>
-          <ul className="text-[14px] text-art-muted leading-relaxed list-disc pl-5">
-            {item.properties.map((p) => <li key={p}>{p}</li>)}
-          </ul>
-        </div>
-      )}
-
-      <div className="mt-4">
+        </Link>
         <button
-          onClick={() => toast({ title: "Техническая карта", description: "PDF будет доступен после подключения каталога поставщика" })}
-          className="h-8 px-3.5 bg-white border border-art-accent-border text-[13px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
+          onClick={(e) => { e.preventDefault(); toggleProductFavorite(item.id); }}
+          className="mt-1 shrink-0"
         >
-          <FileDown className="w-4 h-4" /> Техническая карта (PDF)
+          <Heart className={`w-5 h-5 transition-colors ${isFav ? "fill-art-accent text-art-accent" : "text-art-muted hover:text-art-accent"}`} />
         </button>
       </div>
-    </article>
+    </div>
   );
 };
+
 
 const MaterialsCatalogPage = () => {
   const [search, setSearch] = useState("");
