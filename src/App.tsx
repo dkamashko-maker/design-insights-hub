@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import CatalogPage from "./pages/CatalogPage";
 import MaterialsCatalogPage from "./pages/MaterialsCatalogPage";
+import MaterialDetailPage from "./pages/MaterialDetailPage";
+
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
