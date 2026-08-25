@@ -165,7 +165,8 @@ const CatalogPage = () => {
   return (
     <div className="flex h-[calc(100vh-104px)] overflow-hidden">
       {/* SIDEBAR */}
-      <aside className="w-[345px] shrink-0 border-r border-art-accent-border p-6 overflow-y-auto">
+      <aside className="w-[345px] shrink-0 border-r border-art-accent-border flex flex-col">
+        <div className="flex-1 overflow-y-auto p-6">
 
         {/* ЦЕНА */}
         <div className="mb-6">
@@ -295,8 +296,10 @@ const CatalogPage = () => {
           )}
         </div>
 
+        </div>
+
         {/* Buttons */}
-        <div className="flex flex-col gap-3 mt-8">
+        <div className="flex flex-col gap-3 p-6 pt-4 border-t border-art-accent-border">
           <button
             onClick={() => setPage(1)}
             className="w-full py-3 bg-art-accent text-white font-montserrat font-medium text-[14px] uppercase rounded hover:bg-art-accent/90 transition-colors"
