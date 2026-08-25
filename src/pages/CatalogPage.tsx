@@ -312,6 +312,9 @@ const CatalogPage = () => {
 
         {/* Buttons */}
         <div className="flex flex-col gap-3 p-6 pt-4 border-t border-art-accent-border">
+          <div className="text-center text-small text-art-muted">
+            Найдено товаров: <span className="font-montserrat font-semibold text-art-accent">{matchingCount}</span>
+          </div>
           <button
             onClick={() => setPage(1)}
             className="w-full py-3 bg-art-accent text-white font-montserrat font-medium text-[14px] uppercase rounded hover:bg-art-accent/90 transition-colors"
