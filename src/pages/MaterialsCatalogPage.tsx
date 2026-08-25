@@ -162,8 +162,9 @@ const MaterialsCatalogPage = () => {
 
         <p className="text-small text-art-muted mb-4">Найдено позиций: {filtered.length}</p>
 
-        <div className="flex flex-col gap-6 max-w-[900px]">
+        <div className="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
           {filtered.map((item) => <MaterialCard key={item.id} item={item} />)}
+
           {filtered.length === 0 && (
             <p className="text-body text-art-muted">По вашему запросу ничего не найдено</p>
           )}
