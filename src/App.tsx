@@ -9,6 +9,7 @@ import AdminLayout from "./components/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import CatalogPage from "./pages/CatalogPage";
+import MaterialsCatalogPage from "./pages/MaterialsCatalogPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
@@ -59,6 +60,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:id" element={<ProductDetailPage />} />
+            <Route path="/materials" element={<MaterialsCatalogPage />} />
+            <Route path="/materials/:id" element={<ProductDetailPage />} />
             <Route path="/designs" element={<DesignsPage />} />
             <Route path="/designs/:id" element={<DesignDetailPage />} />
             <Route path="/auth/login" element={<LoginPage />} />

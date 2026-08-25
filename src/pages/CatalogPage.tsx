@@ -317,7 +317,7 @@ const CatalogPage = () => {
 
       {/* MAIN CONTENT */}
       <div className="flex-1 p-6 overflow-y-auto">
-        <h1 className="text-h2 text-art-main mb-8">КАТАЛОГ</h1>
+        <h1 className="text-h2 text-art-main mb-8">МЕБЕЛЬ И ИНТЕРЬЕР</h1>
 
         {/* Search + Sort */}
         <div className="flex items-center gap-4 mb-6">
