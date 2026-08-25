@@ -111,23 +111,10 @@ const MaterialDetailPage = () => {
               <ShoppingCart className="w-4 h-4" /> В корзину
             </button>
             <button
-              onClick={() => toggleProductFavorite(item.id)}
-              className="h-11 px-5 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
-            >
-              <Heart className={`w-4 h-4 ${isFav ? "fill-art-accent text-art-accent" : ""}`} />
-              {isFav ? "В избранном" : "В избранное"}
-            </button>
-            <button
               onClick={() => toast({ title: "Добавлено в проект", description: item.name })}
               className="h-11 px-5 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
             >
               <FolderPlus className="w-4 h-4" /> В проект
-            </button>
-            <button
-              onClick={() => toast({ title: "Добавлено в дизайн", description: item.name })}
-              className="h-11 px-5 bg-white border border-art-accent-border text-[14px] text-art-main rounded flex items-center gap-2 hover:border-art-accent transition-colors"
-            >
-              <FolderPlus className="w-4 h-4" /> В дизайн
             </button>
           </div>
 
