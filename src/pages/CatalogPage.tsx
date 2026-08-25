@@ -151,6 +151,18 @@ const CatalogPage = () => {
     return result;
   }, [search, selectedCategories, selectedBrands, selectedStyles, selectedColors, priceFrom, priceTo, sort]);
 
+  // Count of products matching the current sidebar filter combination (excludes search/sort)
+  const matchingCount = useMemo(() => {
+    let result = [...products];
+    if (selectedCategories.length) result = result.filter((p) => selectedCategories.includes(p.categoryId));
+    if (selectedBrands.length) result = result.filter((p) => selectedBrands.includes(p.brand));
+    if (selectedStyles.length) result = result.filter((p) => selectedStyles.includes(p.style));
+    if (selectedColors.length) result = result.filter((p) => selectedColors.includes(p.color));
+    if (priceFrom) result = result.filter((p) => p.price >= Number(priceFrom));
+    if (priceTo) result = result.filter((p) => p.price <= Number(priceTo));
+    return result.length;
+  }, [selectedCategories, selectedBrands, selectedStyles, selectedColors, priceFrom, priceTo]);
+
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const paginatedProducts = filteredProducts.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
@@ -300,6 +312,9 @@ const CatalogPage = () => {
 
         {/* Buttons */}
         <div className="flex flex-col gap-3 p-6 pt-4 border-t border-art-accent-border">
+          <div className="text-center text-small text-art-muted">
+            Найдено товаров: <span className="font-montserrat font-semibold text-art-accent">{matchingCount}</span>
+          </div>
           <button
             onClick={() => setPage(1)}
             className="w-full py-3 bg-art-accent text-white font-montserrat font-medium text-[14px] uppercase rounded hover:bg-art-accent/90 transition-colors"
