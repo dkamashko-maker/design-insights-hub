@@ -1,3 +1,25 @@
-# Welcome to your Lovable project
+# Design Insights Hub
 
-TODO: Document your project here
+Hi! Can you read the link to analyse design for the solution creation?
+https://www.figma.com/design/uhZfEPLdbHyMVcpN9BV2XV/Intetics?node-id=18-2
+
+This project was built with [Lovable](https://lovable.dev).
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/6643a7cd-38e1-4fc1-b298-e43fc06245e7).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+```sh
+git clone <this-repository-url>
+cd <repository-name>
+npm i
+npm run dev
+```
